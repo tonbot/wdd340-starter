@@ -4,3 +4,164 @@
 *:after {
   box-sizing: border-box;
 }
+
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #fff;
+  color: #111;
+}
+
+#wrapper {
+  max-width: 1100px;
+  margin: auto;
+  border: 4px solid #00bcd4;
+  background: #fff;
+}
+
+/* HEADER */
+#top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.siteName a {
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #000;
+}
+
+#tools a {
+  text-decoration: none;
+  color: #000;
+}
+
+/* NAV */
+nav {
+  background: #222;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  padding: 0.7rem;
+}
+
+nav li {
+  color: #fff;
+  cursor: pointer;
+}
+
+/* HERO */
+.hero {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.hero-text {
+  flex: 1;
+}
+
+.vehicle-name {
+  color: #00bcd4;
+  margin: 1rem 0;
+}
+
+.vehicle-features {
+  list-style: none;
+  margin-bottom: 1rem;
+}
+
+.vehicle-features li {
+  margin-bottom: 0.3rem;
+}
+
+.cta-btn {
+  background: #00bcd4;
+  color: #000;
+  padding: 0.7rem 1.2rem;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.hero-image img {
+  max-width: 100%;
+}
+
+/* CONTENT GRID */
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+/* UPGRADES */
+.upgrade-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.upgrade-card {
+  background: #00bcd4;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.upgrade-card img {
+  width: 60px;
+  height: auto;
+}
+
+.upgrade-card a {
+  display: block;
+  margin-top: 0.5rem;
+  color: #000;
+  font-weight: bold;
+}
+
+/* REVIEWS */
+.reviews ul {
+  margin-top: 1rem;
+}
+
+.reviews li {
+  margin-bottom: 0.6rem;
+}
+
+/* FOOTER */
+footer {
+  padding: 1rem;
+  font-size: 0.85rem;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  nav ul {
+    align-items: center;
+  }
+
+  .hero {
+    flex-direction: column;
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #wrapper {
+    border-width: 2px;
+  }
+}
