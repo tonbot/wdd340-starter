@@ -59,6 +59,17 @@ nav li {
   cursor: pointer;
 }
 
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover {
+  color: #00bcd4;
+}
+
+
 /* HERO */
 .hero {
   display: flex;
@@ -145,11 +156,67 @@ footer {
   font-size: 0.85rem;
 }
 
-/* MOBILE */
+/* INVENTORY DISPLAY */
+#inv-display {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+#inv-display li {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  width: 100%;
+}
+
+#inv-display li img {
+  width: 100%;
+  height: auto;
+}
+
+#inv-display .namePrice {
+  padding: 1rem;
+  width: 100%;
+  text-align: center;
+}
+
+#inv-display .namePrice h2 {
+  margin: 0.5rem 0;
+}
+
+#inv-display .namePrice a {
+  text-decoration: none;
+  color: #111;
+}
+
+#inv-display span {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #00bcd4;
+}
+
+/* MOBILE AND DESKTOP ADJUSTMENTS */
+@media (min-width: 500px) {
+  #inv-display {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+}
+
 @media (max-width: 768px) {
   nav ul {
     align-items: center;
   }
+
 
   .hero {
     flex-direction: column;
