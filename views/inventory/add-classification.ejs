@@ -1,0 +1,38 @@
+<% if (title) { %>
+  <h1><%= title %></h1>
+  <% } else { %>
+    <script>
+      window.location.href = "/"
+    </script>
+  <% } %>
+
+<%- messages() %>
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
+<div class="login-container">
+  <h2>Add New Classification</h2>
+  <p class="instructions">Classification names cannot contain spaces or special characters. Use only letters and numbers.</p>
+  
+  <form id="addClassificationForm" action="/inv/add-classification" method="post" novalidate>
+    <label for="classification_name">Classification Name:</label>
+    <input 
+      type="text" 
+      id="classification_name" 
+      name="classification_name" 
+      required 
+      pattern="^[a-zA-Z0-9]+$"
+      placeholder="Enter classification name (e.g., Motorcycle)" 
+      value="<%= locals.classification_name %>"
+      title="Classification name must contain only letters and numbers, no spaces or special characters"
+    >
+    
+    <button type="submit">Add Classification</button>
+  </form>
+</div>
