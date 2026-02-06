@@ -1,0 +1,27 @@
+<% if (title) { %>
+  <h1><%= title %></h1>
+<% } else { %>
+  <h1>Management</h1>
+<% } %>
+
+<%- messages() %>
+
+<% if (errors) { %>
+  <ul class="notice">
+  <% errors.array().forEach(error => { %>
+    <li><%= error.msg %></li>
+  <% }) %>
+  </ul>
+<% } %>
+
+<div class="account-management">
+  <h2>Welcome <%= locals.accountData.account_firstname %></h2>
+  
+  <p><a href="/account/update/<%= locals.accountData.account_id %>">Update Account Information</a></p>
+  
+  <!-- Debug: Account type is: <%= locals.accountData.account_type %> -->
+  <% if (locals.accountData && (locals.accountData.account_type === "Employee" || locals.accountData.account_type === "Admin")) { %>
+    <h3>Inventory Management</h3>
+    <p><a href="/inv/">Manage Inventory</a></p>
+  <% } %>
+</div>
