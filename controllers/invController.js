@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model")
+const reviewModel = require("../models/review-model")
 const utilities = require("../utilities/")
 
 const invCont = {}
@@ -27,11 +28,27 @@ invCont.buildByInvId = async function (req, res, next) {
   const data = await invModel.getInventoryByInvId(inv_id)
   const detail = await utilities.buildInventoryDetail(data)
   let nav = await utilities.getNav()
+  
+  // Fetch reviews
+  const reviewsData = await reviewModel.getReviewsByInvId(inv_id)
+  const reviewList = await utilities.buildReviewList(reviewsData)
+  
+  // Build review form if logged in
+  let reviewForm = ""
+  if (res.locals.loggedin) {
+    const screenName = `${res.locals.accountData.account_firstname[0]}${res.locals.accountData.account_lastname}`
+    reviewForm = await utilities.buildReviewForm(inv_id, res.locals.accountData.account_id, screenName)
+  } else {
+    reviewForm = '<p class="notice">You must <a href="/account/login">login</a> to write a review.</p>'
+  }
+
   const vehicleName = `${data.inv_make} ${data.inv_model}`
   res.render("./inventory/detail", {
     title: vehicleName,
     nav,
     detail,
+    reviewList,
+    reviewForm,
   })
 }
 

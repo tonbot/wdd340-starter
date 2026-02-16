@@ -161,6 +161,74 @@ Util.checkAccountType = (req, res, next) => {
   }
 }
 
+/* ****************************************
+ *  Build Review List HTML
+ * **************************************** */
+Util.buildReviewList = async function (data) {
+  let list = '<ul id="review-list">'
+  if (data.length > 0) {
+    data.forEach((review) => {
+      const date = new Date(review.review_date).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+      const screenName = `${review.account_firstname[0]}${review.account_lastname}`
+      list += "<li>"
+      list += `<p><strong>${screenName}</strong> wrote on ${date}:</p>`
+      list += `<p>${review.review_text}</p>`
+      list += "</li>"
+    })
+  } else {
+    list += '<li><p class="notice">Be the first to write a review.</p></li>'
+  }
+  list += "</ul>"
+  return list
+}
+
+/* ****************************************
+ *  Build Review Form HTML
+ * **************************************** */
+Util.buildReviewForm = async function (inv_id, account_id, screenName) {
+  let form = '<div id="review-form-container">'
+  form += "<h3>Add a Review</h3>"
+  form += '<form action="/review/add" method="post">'
+  form += `<p><strong>Screen Name:</strong> ${screenName}</p>`
+  form += '<label for="review_text">Review:</label>'
+  form += '<textarea name="review_text" id="review_text" required></textarea>'
+  form += `<input type="hidden" name="inv_id" value="${inv_id}">`
+  form += `<input type="hidden" name="account_id" value="${account_id}">`
+  form += '<button type="submit">Submit Review</button>'
+  form += "</form>"
+  form += "</div>"
+  return form
+}
+
+/* ****************************************
+ *  Build Account Reviews List (for management)
+ * **************************************** */
+Util.buildAccountReviews = async function (data) {
+  let list = '<ul id="account-reviews">'
+  if (data.length > 0) {
+    data.forEach((review) => {
+      const date = new Date(review.review_date).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+      list += "<li>"
+      list += `Reviewed the ${review.inv_year} ${review.inv_make} ${review.inv_model} on ${date}. `
+      list += `<a href="/review/edit/${review.review_id}" title="Edit review">Edit</a> | `
+      list += `<a href="/review/delete/${review.review_id}" title="Delete review">Delete</a>`
+      list += "</li>"
+    })
+  } else {
+    list += '<li><p class="notice">You have not written any reviews yet.</p></li>'
+  }
+  list += "</ul>"
+  return list
+}
+
 module.exports = Util
 
 
